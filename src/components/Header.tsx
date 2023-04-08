@@ -4,12 +4,20 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { APP_NAME } from '../config';
 
 import Menu from './Menu';
+import ButtonIsLogged from "./ButtonIsLogged"
 
-export default function Header() {
-    var ButtonLogin = <Button color="inherit">Login</Button>;
+import { APP_NAME } from '../config';
+const log = 1;
+
+const Header = () => {
+    if (log) {
+        var ButtonLogin = <ButtonIsLogged />
+    } else {
+        var ButtonLogin = <Button color="inherit">Login</Button>;
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed">
@@ -24,3 +32,7 @@ export default function Header() {
         </Box>
     );
 }
+
+
+
+export default Header;
