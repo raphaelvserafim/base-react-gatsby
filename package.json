@@ -23,6 +23,7 @@
     "@mui/material": "^5.11.16",
     "@theme-ui/mdx": "^0.15.7",
     "gatsby": "^5.8.1",
+    "gatsby-plugin-create-client-paths": "^4.9.0",
     "gatsby-plugin-google-gtag": "^5.8.0",
     "gatsby-plugin-image": "^3.8.0",
     "gatsby-plugin-manifest": "^5.8.0",
