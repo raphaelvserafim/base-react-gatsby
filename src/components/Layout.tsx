@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { lightTheme } from '../Theme';
 import Header from './Header';
+import Footer from './Footer';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -14,6 +15,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <CssBaseline />
             <Header />
             {children}
+
+            <Footer />
         </ThemeProvider>
     );
 };
