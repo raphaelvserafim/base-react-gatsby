@@ -7,10 +7,13 @@ import Layout from '../components/Layout';
 
 import CardSkeleton from "../components/CardSkeleton";
 
+import SearchInput from "../components/SearchInput";
+
 const IndexPage = () => {
   return (
     <Layout>
       <Container sx={{ paddingTop: 10, minHeight: '100vh' }}>
+        <SearchInput />
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={0} >
             {
