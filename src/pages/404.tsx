@@ -10,10 +10,10 @@ import img404 from '../images/error-404.svg';
 import Layout from '../components/Layout';
 
 
-const NotFound = () => {
+const NotFoundPage = () => {
 
   const handleHome = () => {
-    navigate(`/`);
+    navigate('/');
   };
 
   return (
@@ -38,5 +38,5 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;
 
