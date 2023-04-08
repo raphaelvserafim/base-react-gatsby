@@ -17,7 +17,10 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@mdx-js/react": "^2.3.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.11.16",
     "@theme-ui/mdx": "^0.15.7",
     "gatsby": "^5.8.1",
     "gatsby-plugin-google-gtag": "^5.8.0",
