@@ -18,7 +18,7 @@ const styles = {
         padding: '10px',
         top: '10px',
     }
-}
+};
 
 const lightTheme = createTheme({
     palette: {
@@ -45,8 +45,6 @@ const lightTheme = createTheme({
     },
 });
 
-
-
 const darkTheme = createTheme({
     palette: {
         primary: {
@@ -58,6 +56,10 @@ const darkTheme = createTheme({
         error: {
             main: '#EF5350',
         },
+        text: {
+            primary: '#fff',
+            secondary: '#BBDEFB',
+        },
         background: {
             default: '#212121',
             paper: '#424242',
@@ -65,6 +67,4 @@ const darkTheme = createTheme({
     },
 });
 
-
-
-export { lightTheme, darkTheme, styles }
+export { lightTheme, darkTheme, styles };

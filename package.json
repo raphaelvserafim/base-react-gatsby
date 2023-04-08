@@ -35,6 +35,7 @@
     "gatsby-transformer-sharp": "^5.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "theme-ui": "^0.15.7"
   },
   "devDependencies": {
