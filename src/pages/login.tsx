@@ -11,11 +11,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Checkbox from '@mui/material/Checkbox';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet';
-
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
@@ -98,7 +96,6 @@ const LoginPage = () => {
                                         name="email"
                                     />
                                 </Grid>
-
 
                                 <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
                                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
