@@ -57,10 +57,11 @@ const signUp = async (data: SignUpData): Promise<ApiResponse> => {
     }
 }
 
-const updateNameProfile = async (name: string) => {
+const updateNameProfile = async (name: string): Promise<void> => {
     if (auth.currentUser) {
         return await updateProfile(auth.currentUser, { displayName: name });
     }
 }
+
 
 export { signUp, Login };
