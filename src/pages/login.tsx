@@ -12,7 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Checkbox from '@mui/material/Checkbox';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet';
 
 import Button from '@mui/material/Button';
@@ -25,6 +26,7 @@ import Layout from '../components/Layout';
 import imgRegister from '../images/register-pana.svg';
 
 
+import { Login } from "../Auth";
 
 const LoginPage = () => {
 
@@ -33,6 +35,32 @@ const LoginPage = () => {
     const handleMouseDownPassword = (event: any) => {
         event.preventDefault();
     };
+
+
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+
+        if (!data.get("email") || !data.get("password")) {
+            toast.error("Please fill in all fields!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            return;
+        }
+
+        const dataLogin = {
+            email: data.get("email") as string,
+            password: data.get("password") as string
+        };
+
+        const result = await Login(dataLogin);
+
+
+        console.log("result=>", result)
+    };
+
 
     return (
         <Layout>
@@ -44,13 +72,14 @@ const LoginPage = () => {
                             <Grid container justifyContent="center" alignItems="center" xs={12} sm={12} md={12}>
                                 <img style={{ maxWidth: 200 }} loading="lazy" src={imgRegister} alt="Register" />
                             </Grid>
-                            <Grid container spacing={2}>
+                            <Grid container spacing={2} component="form" onSubmit={handleSubmit}>
 
                                 <Grid xs={12} sm={12} md={12}>
                                     <TextField
                                         fullWidth
                                         id="email"
                                         label="Email"
+                                        name="email"
                                     />
                                 </Grid>
 
@@ -69,16 +98,18 @@ const LoginPage = () => {
                                                     edge="end"
                                                 >
                                                     {showPassword ? <VisibilityOff /> : <Visibility />}
+
                                                 </IconButton>
                                             </InputAdornment>
                                         }
                                         label="Password"
+                                        name="password"
                                     />
                                 </FormControl>
 
                                 <Grid xs={12} sm={12} md={12}>
                                     <Stack direction="row" spacing={2}>
-                                        <Button variant="contained" endIcon={<SendIcon />}>
+                                        <Button type="submit" variant="contained" endIcon={<SendIcon />}  >
                                             Send
                                         </Button>
                                     </Stack>
