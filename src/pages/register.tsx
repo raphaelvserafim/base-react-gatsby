@@ -12,9 +12,9 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Checkbox from '@mui/material/Checkbox';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet';
-
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
@@ -24,14 +24,58 @@ import Layout from '../components/Layout';
 
 import imgRegister from '../images/register-pana.svg';
 
+import { signUp } from "../Auth";
 
 
 const RegisterPage = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: any) => {
         event.preventDefault();
+    };
+
+
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+
+        const data = new FormData(event.currentTarget);
+
+        if (!data.get("email") || !data.get("password")) {
+            toast.error("Please fill in all fields!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        const dataLogin = {
+            name: data.get("name") as string,
+            email: data.get("email") as string,
+            password: data.get("password") as string,
+            passwordR: data.get("passwordR") as string
+        };
+
+        const result = await signUp(dataLogin);
+
+        if (result.status == 201) {
+            toast.success(result.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+
+        } else {
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            setIsSubmitting(false);
+        }
+
     };
 
     return (
@@ -44,7 +88,7 @@ const RegisterPage = () => {
                             <Grid container justifyContent="center" alignItems="center" xs={12} sm={12} md={12}>
                                 <img style={{ maxWidth: 200 }} loading="lazy" src={imgRegister} alt="Register" />
                             </Grid>
-                            <Grid container spacing={2}>
+                            <Grid container component="form" onSubmit={handleSubmit} spacing={2}>
                                 <Grid xs={12} sm={12} md={12}>
                                     <TextField
                                         fullWidth
@@ -53,6 +97,7 @@ const RegisterPage = () => {
                                         multiline={false}
                                         error={false}
                                         helperText=""
+                                        name="name"
 
                                     />
                                 </Grid>
@@ -61,10 +106,9 @@ const RegisterPage = () => {
                                         fullWidth
                                         id="email"
                                         label="Email"
+                                        name="email"
                                     />
                                 </Grid>
-
-
                                 <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
                                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                     <OutlinedInput
@@ -83,15 +127,40 @@ const RegisterPage = () => {
                                             </InputAdornment>
                                         }
                                         label="Password"
+                                        name="password"
                                     />
                                 </FormControl>
+
+                                <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Confirm password</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        name="passwordR"
+                                    />
+                                </FormControl>
+
                                 <Grid xs={12} sm={12} md={12}>
-                                    <Checkbox /> I accept the terms of use.
+                                    I accept the terms of use.
                                 </Grid>
+
                                 <Grid xs={12} sm={12} md={12}>
                                     <Stack direction="row" spacing={2}>
-                                        <Button variant="contained" endIcon={<SendIcon />}>
-                                            Send
+                                        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                                            {isSubmitting ? 'loading...' : 'Send'}
                                         </Button>
                                     </Stack>
                                 </Grid>
