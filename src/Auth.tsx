@@ -18,6 +18,27 @@ interface ApiResponse {
 }
 
 
+const isUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            unsubscribe();
+            resolve(user);
+        }, reject);
+    });
+}
+
+
+const AuthLogout = async () => {
+    try {
+        await auth.signOut();
+        return true;
+    } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+        return false;
+    }
+};
+
+
 const Login = async (data: LoginData): Promise<ApiResponse> => {
     const { email, password } = data;
     try {
@@ -64,4 +85,4 @@ const updateNameProfile = async (name: string): Promise<void> => {
 }
 
 
-export { signUp, Login };
+export { signUp, Login, isUser, AuthLogout };
