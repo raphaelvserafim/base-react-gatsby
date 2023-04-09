@@ -30,6 +30,9 @@ import { Login } from "../Auth";
 
 const LoginPage = () => {
 
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: any) => {
@@ -41,6 +44,7 @@ const LoginPage = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+
         const data = new FormData(event.currentTarget);
 
         if (!data.get("email") || !data.get("password")) {
@@ -50,6 +54,8 @@ const LoginPage = () => {
             return;
         }
 
+        setIsSubmitting(true);
+
         const dataLogin = {
             email: data.get("email") as string,
             password: data.get("password") as string
@@ -57,8 +63,18 @@ const LoginPage = () => {
 
         const result = await Login(dataLogin);
 
+        if (result.status == 201) {
+            toast.success(result.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
 
-        console.log("result=>", result)
+        } else {
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            setIsSubmitting(false);
+        }
+
     };
 
 
@@ -109,8 +125,8 @@ const LoginPage = () => {
 
                                 <Grid xs={12} sm={12} md={12}>
                                     <Stack direction="row" spacing={2}>
-                                        <Button type="submit" variant="contained" endIcon={<SendIcon />}  >
-                                            Send
+                                        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                                            {isSubmitting ? 'loading...' : 'Send'}
                                         </Button>
                                     </Stack>
                                 </Grid>
