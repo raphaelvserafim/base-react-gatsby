@@ -11,14 +11,13 @@ type LayoutProps = {
     children: React.ReactNode;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
     return (
         <ThemeProvider theme={lightTheme}>
             <CssBaseline />
             <ToastContainer />
             <Header />
             {children}
-
             <Footer />
         </ThemeProvider>
     );
