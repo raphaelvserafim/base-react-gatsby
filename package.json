@@ -22,6 +22,8 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.16",
     "@theme-ui/mdx": "^0.15.7",
+    "dotenv": "^16.0.3",
+    "firebase": "^9.19.1",
     "gatsby": "^5.8.1",
     "gatsby-plugin-create-client-paths": "^4.9.0",
     "gatsby-plugin-google-analytics": "^5.8.0",
@@ -42,6 +44,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-toastify": "^9.1.2",
     "theme-ui": "^0.15.7"
   },
   "devDependencies": {
