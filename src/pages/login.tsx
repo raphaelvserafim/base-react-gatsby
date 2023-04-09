@@ -17,6 +17,7 @@ import { Helmet } from 'react-helmet';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
+import { Link } from 'gatsby';
 
 
 import Layout from '../components/Layout';
@@ -127,6 +128,11 @@ const LoginPage = () => {
                                         </Button>
                                     </Stack>
                                 </Grid>
+
+                                <Grid xs={12} sm={12} md={12}>
+                                    <Link to="/register">I don't have an account</Link>
+                                </Grid>
+
                             </Grid>
                         </Paper>
                     </Box>
