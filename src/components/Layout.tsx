@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ToastContainer } from 'react-toastify';
+
 import { lightTheme } from '../Theme';
 import Header from './Header';
 import Footer from './Footer';
@@ -13,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <ThemeProvider theme={lightTheme}>
             <CssBaseline />
+            <ToastContainer />
             <Header />
             {children}
 
