@@ -10,17 +10,56 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { navigate } from 'gatsby';
 
-const ButtonIsLogged = () => {
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
+
+import { AuthLogout } from '../Auth';
+
+const ButtonIsLogged = (user: any) => {
+
+    const [openModal, setOpenModal] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const open = Boolean(anchorEl);
+
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
+
+    const logout = async () => {
+        
+        var logout = await AuthLogout();
+        if (logout) {
+            setOpenModal(false);
+            if (window.location.pathname === '/') {
+                window.location.reload();
+            } else {
+                navigate("/");
+            }
+        } else {
+            toast.error("Error exiting", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    }
+
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -33,7 +72,7 @@ const ButtonIsLogged = () => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        <Avatar sx={{ width: 32, height: 32 }}>{user.user.displayName.charAt(0).toUpperCase()}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -73,10 +112,7 @@ const ButtonIsLogged = () => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose}>
-                    <Avatar /> Profile
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <Avatar /> My account
+                    <Avatar /> {user.user.displayName}
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleClose}>
@@ -91,14 +127,30 @@ const ButtonIsLogged = () => {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => { setOpenModal(true) }}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
                     Logout
                 </MenuItem>
             </Menu>
+            <Dialog
+                open={openModal}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description">
+                <DialogTitle id="scroll-dialog-title">😅 Do you really want to leave ?</DialogTitle>
+                {/* <DialogContent>
+                    <DialogContentText tabIndex={-1} >
+                    </DialogContentText>
+                </DialogContent> */}
+                <DialogActions>
+                    <Button onClick={() => { setOpenModal(false) }}>Cancel</Button>
+                    <Button onClick={() => { logout() }}>Confirm</Button>
+                </DialogActions>
+            </Dialog>
+
         </React.Fragment>
+
     );
 }
 
