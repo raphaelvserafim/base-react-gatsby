@@ -4,15 +4,44 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 
 import Layout from '../components/Layout';
- 
-const ProfilePage = () => {
+
+import { isUser } from '../Auth';
+
+const ProfilePage = (prop: any) => {
+
+    const [isLogged, setIsLogged] = React.useState(false);
+
+    const [user, setUser] = React.useState({});
+
+    React.useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const user = await isUser();
+                if (user) {
+                    setIsLogged(true);
+                    setUser(user)
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        checkUser();
+    }, []);
+
+    
     return (
         <Layout>
-            <Container sx={{ paddingTop: 10, minHeight: '100vh' }}>
-
-
-            </Container>
+            {isLogged ? (
+                <Container sx={{ paddingTop: 10, minHeight: '100vh' }}>
+                    Is logado
+                </Container>
+            ) : (
+                <Container sx={{ paddingTop: 10, minHeight: '100vh' }}>
+                    Nao logado
+                </Container>
+            )}
         </Layout>
+
     );
 };
 

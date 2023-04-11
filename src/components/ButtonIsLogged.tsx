@@ -28,6 +28,8 @@ import { AuthLogout } from '../Auth';
 
 const ButtonIsLogged = (user: any) => {
 
+   
+
     const [openModal, setOpenModal] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -44,7 +46,7 @@ const ButtonIsLogged = (user: any) => {
 
 
     const logout = async () => {
-        
+
         var logout = await AuthLogout();
         if (logout) {
             setOpenModal(false);
@@ -111,22 +113,18 @@ const ButtonIsLogged = (user: any) => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => { navigate('/profile') }}>
                     <Avatar /> {user.user.displayName}
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <PersonAdd fontSize="small" />
-                    </ListItemIcon>
-                    Add another account
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+
+                {/* <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
                     Settings
-                </MenuItem>
+                </MenuItem> */}
+
                 <MenuItem onClick={() => { setOpenModal(true) }}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
@@ -138,7 +136,7 @@ const ButtonIsLogged = (user: any) => {
                 open={openModal}
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description">
-                <DialogTitle id="scroll-dialog-title">😅 Do you really want to leave ?</DialogTitle>
+                <DialogTitle id="scroll-dialog-title"> 😅 Do you really want to leave ? </DialogTitle>
                 {/* <DialogContent>
                     <DialogContentText tabIndex={-1} >
                     </DialogContentText>

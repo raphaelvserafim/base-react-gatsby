@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
- 
+
 
 
 import Menu from './Menu';
@@ -15,12 +15,10 @@ import ButtonIsLogged from "./ButtonIsLogged"
 import { APP_NAME } from '../config';
 
 
-import "../css/App.css"
-
 import { isUser } from '../Auth';
 
 
-const Header = () => {
+const Header = (props: any) => {
 
     const [isLogged, setIsLogged] = React.useState(false);
     const [user, setUser] = React.useState({});

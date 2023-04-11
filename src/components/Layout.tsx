@@ -3,15 +3,19 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ToastContainer } from 'react-toastify';
 
+import "../css/App.css"
+
 import { lightTheme } from '../Theme';
 import Header from './Header';
 import Footer from './Footer';
+
 
 type LayoutProps = {
     children: React.ReactNode;
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+
     return (
         <ThemeProvider theme={lightTheme}>
             <CssBaseline />
@@ -22,5 +26,6 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
         </ThemeProvider>
     );
 };
+
 
 export default Layout;
