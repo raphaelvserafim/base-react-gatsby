@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import Layout from '../components/Layout';
 
 
-const IndexPage = () => {
+const BlankPage = () => {
     return (
         <Layout>
             <Container sx={{ paddingTop: 10, minHeight: '100vh' }}>
@@ -15,7 +15,7 @@ const IndexPage = () => {
     );
 };
 
-export default IndexPage;
+export default BlankPage;
 
 
 export const Head = () => (
